@@ -14,6 +14,9 @@ Installation:
   - Launch the script in your browser to activate Modifixer.
   - Use the on-screen buttons to toggle between inspecting elements, editing global variables, or closing the interface.
 
+Screenshots:
+![grafik](https://github.com/user-attachments/assets/a5717440-3eea-46d2-843c-fe8298848e37)
+
 Usage:
 
   - Inspect Mode: Click the "Inspect Mode" button to start hovering over and inspecting elements.
