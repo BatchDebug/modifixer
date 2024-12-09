@@ -4,7 +4,7 @@
 
     // Create main container
     const container = document.createElement('div');
-    container.style.cssText = 
+    container.style.cssText = `
         position: fixed;
         top: 5%;
         left: 5%;
@@ -19,36 +19,36 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-    ;
+    `;
 
     // Header Section
     const header = document.createElement('div');
-    header.style.cssText = 
+    header.style.cssText = `
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px;
         background: #2c2c3d;
         border-bottom: 2px solid #4caf50;
-    ;
-    header.innerHTML = 
+    `;
+    header.innerHTML = `
         <h2 style="margin: 0; font-size: 1.5rem; color: #4caf50;">Modifixer</h2>
         <div>
             <button id="modifixer-inspect" style="background: #4caf50; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer;">Inspect Mode</button>
             <button id="modifixer-edit-vars" style="background: #4caf50; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer;">Edit All Variables</button>
             <button id="modifixer-close" style="background: red; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer;">Close</button>
         </div>
-    ;
+    `;
 
     // Content Section
     const content = document.createElement('div');
-    content.style.cssText = 
+    content.style.cssText = `
         flex: 1;
         padding: 20px;
         overflow-y: auto;
         background: #1e1e2d;
-    ;
-    content.innerHTML = <p style="color: #aaa;">Welcome to Modifixer! Use the buttons above to inspect elements or edit global variables.</p>;
+    `;
+    content.innerHTML = `<p style="color: #aaa;">Welcome to Modifixer! Use the buttons above to inspect elements or edit global variables.</p>`;
 
     // Add elements to container
     container.appendChild(header);
@@ -115,13 +115,13 @@
     // Display Element Details and Editing Options
     function displayElementDetails(element) {
         container.style.display = 'flex';
-        content.innerHTML = 
+        content.innerHTML = `
             <h3>Inspecting: ${element.tagName}</h3>
             <h4>Attributes:</h4>
             <ul>${Array.from(element.attributes || [])
-                .map(attr => 
+                .map(attr => `
                     <li>${attr.name}: 
-                    <input value="${attr.value}" id="attr-${attr.name}" style="background: #333; color: #fff; border: none; padding: 5px; border-radius: 5px;"></li>)
+                    <input value="${attr.value}" id="attr-${attr.name}" style="background: #333; color: #fff; border: none; padding: 5px; border-radius: 5px;"></li>`)
                 .join('') || '<li>None</li>'}</ul>
             <button id="apply-attributes" style="margin: 10px 0; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer;">Apply Attributes</button>
             <h4>Styles:</h4>
@@ -130,16 +130,16 @@
                 .filter(style => style.trim())
                 .map(style => {
                     const [key, value] = style.trim().split(':');
-                    return <li>${key}: 
-                    <input value="${value.trim()}" id="style-${key.trim()}" style="background: #333; color: #fff; border: none; padding: 5px; border-radius: 5px;"></li>;
+                    return `<li>${key}: 
+                    <input value="${value.trim()}" id="style-${key.trim()}" style="background: #333; color: #fff; border: none; padding: 5px; border-radius: 5px;"></li>`;
                 })
                 .join('') || '<li>None</li>'}</ul>
             <button id="apply-styles" style="margin: 10px 0; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer;">Apply Styles</button>
             <button id="exit-inspect" style="margin-top: 20px; padding: 10px; background: #4caf50; color: white; border: none; border-radius: 5px; cursor: pointer;">Return to Inspect Mode</button>
-        ;
+        `;
         document.getElementById('apply-attributes').addEventListener('click', () => {
             Array.from(element.attributes || []).forEach(attr => {
-                const newValue = document.getElementById(attr-${attr.name}).value;
+                const newValue = document.getElementById(`attr-${attr.name}`).value;
                 element.setAttribute(attr.name, newValue);
             });
         });
@@ -149,7 +149,7 @@
                 .filter(style => style.trim())
                 .map(style => style.trim().split(':'))
                 .forEach(([key]) => {
-                    const newValue = document.getElementById(style-${key.trim()}).value;
+                    const newValue = document.getElementById(`style-${key.trim()}`).value;
                     element.style[key.trim()] = newValue;
                 });
         });
@@ -159,16 +159,16 @@
     // Display All Variables
     function showAllVariables() {
         deactivateInspectMode();
-        content.innerHTML = <h3>All Global Variables:</h3>;
+        content.innerHTML = `<h3>All Global Variables:</h3>`;
         const vars = Object.entries(window).filter(([key, value]) => typeof value !== 'function');
         vars.forEach(([key, value]) => {
             const div = document.createElement('div');
             div.style.cssText = 'margin-bottom: 10px; color: #aaa;';
-            div.innerHTML = 
+            div.innerHTML = `
                 <strong>${key}</strong>: 
                 <input id="var-${key}" value="${value}" style="width: 70%; background: #333; color: #fff; border: none; padding: 5px; border-radius: 5px;">
                 <button style="margin-left: 5px; background: #4caf50; color: white; border: none; padding: 5px; border-radius: 5px; cursor: pointer;" onclick="window['${key}'] = document.getElementById('var-${key}').value;">Apply</button>
-            ;
+            `;
             content.appendChild(div);
         });
     }
