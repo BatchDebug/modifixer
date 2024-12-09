@@ -16,6 +16,7 @@ Installation:
 
 Screenshots:
 ![grafik](https://github.com/user-attachments/assets/a5717440-3eea-46d2-843c-fe8298848e37)
+![grafik](https://github.com/user-attachments/assets/f773b553-b602-4fc1-9dca-daaaf8a41876)
 
 Usage:
 
